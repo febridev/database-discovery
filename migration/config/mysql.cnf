@@ -1,0 +1,32 @@
+[client]
+port = 3306
+socket = /var/run/mysqld/mysqld.sock
+
+[mysqld]
+user = mysql
+port = 3306
+datadir = /var/lib/mysql
+tmpdir = /tmp
+socket = /var/run/mysqld/mysqld.sock
+pid_file = /var/run/mysqld/mysqld.pid
+default_time_zone = "+07:00"
+sql_mode = NO_ENGINE_SUBSTITUTION
+local_infile=ON
+
+plugin_load_add = auth_socket.so
+
+default_storage_engine = InnoDB
+
+bind_address = 0.0.0.0
+
+log_output = FILE
+log_error = /var/log/mysql/error.log
+innodb_print_all_deadlocks = 1
+
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/mysql-slowquery.log
+long_query_time = 10
+
+binlog_format = ROW
+log_bin_trust_function_creators = 1
+innodb_flush_method = O_DIRECT

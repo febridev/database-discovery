@@ -1,0 +1,25 @@
+version: "3.1"
+
+services:
+  mysql:
+    container_name: mysql-dba
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - "./data:/var/lib/mysql"
+      - "./log:/var/log/mysql"
+      - "./config:mysql.cnf:/etc/mysql/mysql.cnf"
+    networks:
+      - dba_network
+    ports:
+      - 13306:3306
+
+volumes:
+  v_mysql_data:
+
+networks:
+  dba_network:
+    external: true
